@@ -28,7 +28,7 @@
 	</style>
   </head>
   <body>
-    <h1><span>We</span>Care</h1>
+    <h1><span>We</span>Care testing</h1>
 	<ul>
 		<li><a href="ChildDailyAct.php">Home</a></li>
 		<li><a href="AddNewChild.php">Add Child</a></li>
