@@ -37,6 +37,36 @@
 	</ul>
     <form>
 		<div style="width:300px;">
+		
+		<center>
+			<?php
+
+$server = "localhost";
+$user = "root";
+$pw = "";
+$db = "wecare";
+
+$conn =mysqli_connect($server, $user, $pw, $db);
+
+
+
+
+$UserQuery = "SELECT First_Name, Last_Name FROM wecare.employee";
+$result = mysqli_query($conn, $UserQuery);
+
+echo"<select name='First_Name', 'Last_Name'>";
+
+
+while ($row = mysqli_fetch_array($result))
+	{
+		echo "<option value='" . $row['First_Name'] . "," . $row['Last_Name'] . " '>" . $row['First_Name'] . " " . $row['Last_Name'] . "</option>" ;
+		
+		
+	}
+	
+echo "</select>"
+ 
+?></center>
 			
       
 			<h3><center>Add/Remove/Edit Child</center> </h3>
