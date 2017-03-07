@@ -48,16 +48,22 @@
 		<table rules="rows" width="200px">
 			<tr>
 				<th><center>Name</center></th>
-				
-			</tr>
-			<tr>
-				<td><center><a href="ChildDailyAct.php">Jill Smith</a></center></td>
-				
-			</tr>
-			<tr>
-				<td><center>Eve Jackson</center></td>
-				
-			</tr>
+<?php
+$server = "localhost";
+$user = "root";
+$pw = "";
+$db = "wecare";
+
+$conn = mysqli_connect($server,$user, $pw, $db);
+
+$RosterQuery = "Select First_Name, Last_Name, Child_ID From wecare.child";
+$result = mysqli_query($conn,$RosterQuery);
+while ($ChildRoster = mysqli_fetch_assoc($result))
+{
+	echo "<tr><td><center><a href='ChildDailyAct.php?id= ". $ChildRoster['Child_ID'] . " '>" . $ChildRoster["First_Name"] . " " . $ChildRoster["Last_Name"] . "</a></center></td></tr>";
+}
+
+?>
 		</table>
 		<form>
 		<a id="edit" style="float: bottomPage;" href="AddNewChild.php">Edit</a>
