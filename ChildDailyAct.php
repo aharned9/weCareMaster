@@ -48,56 +48,65 @@
 		<table rules="rows" width="200px">
 			<tr>
 				<th><center>Name</center></th>
-				
-			</tr>
-			<tr>
-				<td><center>Jill Smith</center></td>
-				
-			</tr>
-			<tr>
-				<td><center>Eve Jackson</center></td>
-				
-			</tr>
+<?php
+$server = "localhost";
+$user = "root";
+$password = "";
+$database = "wecare";
+
+$connection = mysqli_connect($server,$user, $password, $database);
+
+$RosterQuery = "Select First_Name, Last_Name, Child_ID From wecare.child";
+$result = mysqli_query($connection,$RosterQuery);
+while ($ChildRoster = mysqli_fetch_assoc($result))
+{
+	echo "<tr><td><center><a href='ChildDailyAct.php?id= ". $ChildRoster['Child_ID'] . " '>" . $ChildRoster["First_Name"] . " " . $ChildRoster["Last_Name"] . "</a></center></td></tr>";
+}
+
+?>
 		</table>
 		<form>
 		<a id="edit" style="float: bottomPage;" href="AddNewChild.php">Edit</a>
 		
 		</form>
 	</div>
+<!-- columns divs, float left, no margin so there is no space between column, width=1/3 -->
+<?php
 
-<div id="topPage" style="margin-left: 200px; background-color: #CCFFFF" valign="top">
+$connect = mysqli_connect($server, $user, $password, $database);
+$ChildKey = $_POST['id'];
+$ChildQuery = "Select First_Name, Last_Name, Allergies, Parent_Name, Parent_Email, Parent_Phone_Num, Street, City, State, Zip, Special_Instructions From wecare.child where Child_ID=" . $_GET['id'];
+$result = mysqli_query($connect, $ChildQuery);
 
+while($ChildInfo = mysqli_fetch_assoc($result))
+{
+echo '<div id="topPage" style="margin-left: 200px; background-color: #CCFFFF" valign="top">
 
- <!-- columns divs, float left, no margin so there is no space between column, width=1/3 -->
-    <div id="column1"style="float:left; margin:0; width:33%;  border-bottom: 1px solid black; border-top: 1px solid black;">
+   <div id="column1"style="float:left; margin:0; width:33%;  border-bottom: 1px solid black; border-top: 1px solid black;">
 	<Center><b>Child Information</b></center>
 	&nbsp;
-    <p align="center">Jill Smith</p>
-	&nbsp;
-	 <p align="center"> 2/16/2012 </p>
-	 &nbsp;
-	 
-	 <p align="center"> Allergic to tree nuts </p>
+    <p align="center">' . $ChildInfo['First_Name'] . ' ' . $ChildInfo['Last_Name'] . '  </p>
+	 <p align="center"> 2/16/2012 </p> 
+	 <p align="center">' . $ChildInfo['Allergies'] . ' </p>
     </div>
 
     <div id="column2" style="float:left; margin:0;width:33%; border-bottom: 1px solid black; border-top: 1px solid black;">
      <Center><b>Parent Information</b></center>
 	 &nbsp;
-	 <p align="center"> Parental Contact Name </p>
-	 &nbsp;
-	 <p align="center"> Parental Contact E-Mail </p>
-	 &nbsp;
-	 <p align="center"> Parental Contact Number </p>
+	 <p align="center">' . $ChildInfo['Parent_Name'] . ' </p>
+	 <p align="center">' . $ChildInfo['Parent_Email'] . ' </p>
+	 <p align="center">' . $ChildInfo['Parent_Phone_Num'] . ' </p>
     </div>
 
     <div id="column3" style="float:left; margin:0;width:33%; border-bottom: 1px solid black; border-top: 1px solid black; border-right: 1px solid black;">
      <Center><b>Additional Information</b></center>
 	 &nbsp;
-	  <p align="center"> Address </p>
-	 &nbsp;
-	 <p align="center"> Additional Instructions </p>
+	  <p align="center">' . $ChildInfo['Street'] . " " . $ChildInfo['City'] . " " . $ChildInfo['State'] . " " . $ChildInfo['Zip'] . ' </p>
+	 <p align="center">' .  $ChildInfo['Special_Instructions'] . ' </p>
     </div>
-</div>
+</div>';
+}
+?>
 
 <div id="bottomPage" style="margin-left: 200px; background-color: #FFFFCC" valign="bottom" >
 <form>
