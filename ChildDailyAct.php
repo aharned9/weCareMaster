@@ -106,9 +106,15 @@ echo '<div id="topPage" style="margin-left: 200px; background-color: #CCFFFF" va
     </div>
 </div>';
 }
-?>
 
-<div id="bottomPage" style="margin-left: 200px; background-color: #FFFFCC" valign="bottom" >
+$conn = mysqli_connect($server, $user, $password, $database);
+$ActivityQuery = "Select * From wecare.activity Where Child_ID=" . $_GET['id'];
+$result = mysqli_query($conn, $ActivityQuery);
+
+while($ActInfo = mysqli_fetch_assoc($result))
+{
+	
+ echo '<div id="bottomPage" style="margin-left: 200px; background-color: #FFFFCC" valign="bottom" >
 <form>
 	<table width="80%" height="80%" cellspacing="35">
 		
@@ -117,25 +123,27 @@ echo '<div id="topPage" style="margin-left: 200px; background-color: #CCFFFF" va
 			<td> </td>
 		</tr>
 		<tr>
-			<td><center>Nap Time</center></td>
-			<td> Major Milestones</td>		
+			<td><center>Nap Time: '. $ActInfo['Nap_Time'] . '</center></td>
+			<td>Major Milestones: ' . $ActInfo['Milestones'] . '<td>
 		</tr>
 		<tr>
-			<td><center>Food Eaten</center></td>
-			<td> Photos</td>		
+			<td><center>Food Eaten: '. $ActInfo['Food_Eaten'] . '</center></td>
+			<td>Exercise: '. $ActInfo['Exercise'] . '</td>
+					
 		</tr>
 		<tr>
-			<td><center>Exercise</center></td>
-			<td> Comments</td>		
+			<td><center>Progressions: '. $ActInfo['Progresstion'] . '</center></td>
+			<td>Comments: '. $ActInfo['Comments'] . '</td>		
 		</tr>
 		<tr>
-			<td><center>Progressions</center></td>
+			<td><center>Photos:</center></td>
 			<td> </td>		
 		</tr>
 		<tr>
 			<td></td>
 			<td> </td>		
-		</tr>
+		</tr>';
+}?>
 		<tr>
 			<td><form><a id="sendReports" style="float: right" href="#">Save</a><a id="sendReports" style="float: left" href="Report.php">Send Report</a></form> </td>
 		</tr>	
