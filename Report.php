@@ -5,8 +5,7 @@
     <meta charset = "UTF-8" />
 	<style>
 		span{ color:red}
-		th, td {padding: 30px; text-align: center }
-                div{ height: 100%}
+		
 	</style>
   </head>
   <body>
@@ -21,14 +20,13 @@ $pw = "";
 $db = "wecare";
 $conn =mysqli_connect($server, $user, $pw, $db);
 
-$NameQuery = "SELECT First_Name, Last_Name FROM wecare.report";
+$NameQuery = "SELECT First_Name, Last_Name FROM wecare.child WHERE Child_ID = 101";
 $result = mysqli_query($conn, $NameQuery);
 
 $today = today.date;
 while ($row = mysql_fetch_object($result))
 	{
-		//echo "<center><h2>Child Name: " . $row["First_Name"]. " " . $row["Last_Name"];
-                //echo "<br> Date: $today";
+		
                 echo '<div id="topPage" style="margin-left: 200px; background-color: #CCFFFF" valign="top">
    <div id="column1"style="float:left; margin:0; width:33%;  border-bottom: 1px solid black; border-top: 1px solid black;">
 	<Center><b>Child Information</b></center>
@@ -37,26 +35,21 @@ while ($row = mysql_fetch_object($result))
 	 <p align="center">'. 'Date:'. $NameQuery[$today].'</p> 
 	 
     </div>';
-		
-                        
-		
+				
 		
 	}
- 
-
-        
+     
 	
        
 $connect =mysqli_connect($server, $user, $pw, $db);
 
-$ChildQuery = "SELECT Child_ID, Timestamp, Report_Data FROM wecare.report";
+$ChildQuery = "SELECT Timestamp, Report_Data FROM wecare.activity WHERE Child_ID=101";
 $result = mysqli_query($connect, $ChildQuery);
 
 
 while ($ChildQuery = mysql_fetch_assoc($result))
 	{
-		//echo "Child ID: " . $ChildQuery["Child_ID"]. " ". "<br>". "Timestamp: " . $ChildQuery["Timestamp"]. " ".
-                       // "<br>". "Report Data: " . $ChildQuery["Report_Data"]. "<br>";
+		
 		echo '<div id="topPage" style="margin-left: 200px; background-color: #CCFFFF" valign="top">
    <div id="column2"style="float:left; margin:0; width:33%;  border-bottom: 1px solid black; border-top: 1px solid black;">
 	<Center><b>Child Information</b></center>
@@ -74,13 +67,11 @@ while ($ChildQuery = mysql_fetch_assoc($result))
  
 $cont =mysqli_connect($server, $user, $pw, $db);
 
-$ReportQuery = "SELECT Nap_Time, Food_Eaten, Exercise, Progression, Milestone, Comments  FROM wecare.activity";
+$ReportQuery = "SELECT Nap_Time, Food_Eaten, Exercise, Progression, Milestone, Comments  FROM wecare.activity WHERE  Child_ID = 101";
 $result = mysqli_query($cont, $ReportQuery);
 
 while ($ReportQuery = mysqli_fetch_assoc($result)) {
-    //echo "Nap Time: " . $ReportQuery["Nap_Time"]. " ". "<br>". "Food Eaten: " . " ". $ReportQuery["Food_Eaten"].
-           // " ". "<br>". "Exercise: ". " ". $ReportQuery["Exercise"]. " ". "<br>". "Progression: ". " ". $ReportQuery["Progression"].
-           // " ". "<br>"."Milestone: ". " ". $ReportQuery["Milestone"]. " ". "<br>". "Comments: ". " ". $ReportQuery["Comments"];
+    
     
 echo '
     <div id="column3" style="float:left; margin:0;width:33%; border-bottom: 1px solid black; border-top: 1px solid black;">
