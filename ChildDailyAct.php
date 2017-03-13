@@ -120,7 +120,7 @@ while($ActInfo = mysqli_fetch_assoc($result))
 		
 		<tr>
 			<td><form><a id="pastReports" style="float: left" href="PastReports.php">View Past Reports</a></form></td>
-			<td><form><a id="pastReports" style="float: left" href="Report2.php?id= '. $ActInfo['Child_ID'] . '"> Preview Report</a></form></td>
+			<td><form><a id="pastReports" style="float: left" href="Report.php?id= '. $ActInfo['Child_ID'] . '"> Preview Report</a></form></td>
 			<td> </td>
 		</tr>
 		<tr>
