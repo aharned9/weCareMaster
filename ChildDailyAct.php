@@ -120,6 +120,7 @@ while($ActInfo = mysqli_fetch_assoc($result))
 		
 		<tr>
 			<td><form><a id="pastReports" style="float: left" href="PastReports.php">View Past Reports</a></form></td>
+			<td><form><a id="pastReports" style="float: left" href="Report2.php?id= '. $ActInfo['Child_ID'] . '"> Preview Report</a></form></td>
 			<td> </td>
 		</tr>
 		<tr>
@@ -132,7 +133,7 @@ while($ActInfo = mysqli_fetch_assoc($result))
 					
 		</tr>
 		<tr>
-			<td><center>Progressions: '. $ActInfo['Progresstion'] . '</center></td>
+			<td><center>Progressions: '. $ActInfo['Progression'] . '</center></td>
 			<td>Comments: '. $ActInfo['Comments'] . '</td>		
 		</tr>
 		<tr>
@@ -144,10 +145,7 @@ while($ActInfo = mysqli_fetch_assoc($result))
 			<td> </td>		
 		</tr>';
 }?>
-		<tr>
-			<td><form><a id="sendReports" style="float: right" href="#">Save</a><a id="sendReports" style="float: left" href="Report.php">Send Report</a></form> </td>
-		</tr>	
-			
+					
 	</table>
 			
 
