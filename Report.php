@@ -1,109 +1,90 @@
 <!DOCTYPE HTML>
 <html lang = "en">
   <head>
-    <title>Report.php</title>
+    <title>Report.html</title>
     <meta charset = "UTF-8" />
 	<style>
-		span{ color:red}
-		
+
+h1 {
+    color: black;
+    text-align: left;
+}
+h2 {
+    color: black;
+    text-align: center;
+}
+h3 {
+    color: black;
+    text-align: center;
+}
+
+p {
+    font-family: verdana;
+    font-size: 20px;
+	padding: 5px 5px 7px 100px;
+}
+#name{
+	background-color: lightyellow;
+}
+#info{
+	background-color: lightblue;
+}
+span{ color:red;
+	float: left;
+ }
+ header{
+	 background-color: white;
+ }
+ #back {
+		display: block;	font-size: 1.1em; font-weight: bold; padding: 10px 15px;
+		margin: 20px auto; margin-bottom: 2cm; width: 100px; background-color: #555;
+		color: #ccc; background: -webkit-linear-gradient(#888, #555); background: linear-gradient(#888, #555);
+		text-shadow: 0 -1px 0 #000;	box-shadow: 0 1px 0 #666, 0 5px 0 #444, 0 6px 6px rgba(0,0,0,0.6);
+		cursor: pointer; position: absolute; bottom: -90px; left: 40px; 
+}
+ 
 	</style>
   </head>
+  <header>
+  <h1><span>We</span>Care</h1>
+  <header>
   <body>
-	<h1><span>We</span>Care</h1>
-	
-        
-     
+
 <?php
 $server = "localhost";
 $user = "root";
 $pw = "";
 $db = "wecare";
-$conn =mysqli_connect($server, $user, $pw, $db);
 
-$NameQuery = "SELECT First_Name, Last_Name FROM wecare.child WHERE Child_ID = 101";
-$result = mysqli_query($conn, $NameQuery);
+$conn = mysqli_connect($server,$user, $pw, $db);
+$ReportQuery = "SELECT * FROM wecare.child INNER JOIN wecare.activity ON child.child_id = activity.child_id AND child.child_id =" . $_GET['id'];
+$result = mysqli_query($conn,$ReportQuery);
 
-$today = today.date;
-while ($row = mysql_fetch_object($result))
-	{
-		
-                echo '<div id="topPage" style="margin-left: 200px; background-color: #CCFFFF" valign="top">
-   <div id="column1"style="float:left; margin:0; width:33%;  border-bottom: 1px solid black; border-top: 1px solid black;">
-	<Center><b>Child Information</b></center>
-	&nbsp;
-    <p align="center">' .'Name: '. $NameQuery['First_Name'] . ' ' . $NameQuery['Last_Name'] . '  </p>
-	 <p align="center">'. 'Date:'. $NameQuery[$today].'</p> 
-	 
-    </div>';
-				
-		
-	}
-     
+while ($ChildReport = mysqli_fetch_assoc($result))
+{
 	
-       
-$connect =mysqli_connect($server, $user, $pw, $db);
 
-$ChildQuery = "SELECT Timestamp, Report_Data FROM wecare.activity WHERE Child_ID=101";
-$result = mysqli_query($connect, $ChildQuery);
-
-
-while ($ChildQuery = mysql_fetch_assoc($result))
-	{
-		
-		echo '<div id="topPage" style="margin-left: 200px; background-color: #CCFFFF" valign="top">
-   <div id="column2"style="float:left; margin:0; width:33%;  border-bottom: 1px solid black; border-top: 1px solid black;">
-	<Center><b>Child Information</b></center>
-	&nbsp;
-    <p align="center">' .'Name'. $ChildQuery['Child_ID'] . ' ' .'<br>'.''
-                        . ' '.'Timestam: '. $ChildQuery['Timestamp'] . '  </p>
-	 <p align="center">'. 'Report Data:'. $ChildQuery["Report_Data"].' </p> 
-	 
-    </div>';
-		
-	}
-        
-      
-
+ $report = "<div id = 'name'><h2>Child Daily Report<h2> " . $ChildReport["First_Name"] . " " . $ChildReport["Last_Name"]. "</h1><h3> Date: " . date("m/d/Y") . "</h3></div>";
  
-$cont =mysqli_connect($server, $user, $pw, $db);
-
-$ReportQuery = "SELECT Nap_Time, Food_Eaten, Exercise, Progression, Milestone, Comments  FROM wecare.activity WHERE  Child_ID = 101";
-$result = mysqli_query($cont, $ReportQuery);
-
-while ($ReportQuery = mysqli_fetch_assoc($result)) {
-    
-    
-echo '
-    <div id="column3" style="float:left; margin:0;width:33%; border-bottom: 1px solid black; border-top: 1px solid black;">
-     <Center><b>Parent Information</b></center>
-	 &nbsp;
-	 <p align="center">'.'Nap Time:'. $ReportQuery["Nap_Time"].' </p>
-	 <p align="center">'.'Food Eaten:'. $ReportQuery["Food_Eaten"].' </p>
-	 <p align="center">'.'Exercise:'. $ReportQuery["Exercise"].' </p>
-    </div>
-    <div id="column4" style="float:left; margin:0;width:33%; border-bottom: 1px solid black; border-top: 1px solid black; border-right: 1px solid black;">
-     <Center><b>Additional Information</b></center>
-	 &nbsp;
-	  <p align="center">'.'Prograssion:'. $ReportQuery["Progression"].' </p>
-	 <p align="center">'.'Milestone:'. $ReportQuery["Milestone"].' </p>
-          <p align="center">'.'Comments:'. $ReportQuery["Comments"].' </p>
-    </div>
-</div>';
-        
+ $report .= "<div id = 'info'><p>Today, " . $ChildReport["First_Name"] . " ate " . $ChildReport["Food_Eaten"] . "</p>";
  
-}?>
+ $report .= "<p>Took a nap from: " . $ChildReport["Nap_Time"] . "</p>";
+ $report .= "<p>Exercise Activities : " . $ChildReport["Exercise"] . "</p>";
+ if ($ChildReport["Milestones"] != NULL)
+  $report .= "<p> Milestones: " . $ChildReport["Milestones"] . "</p>";
+ if ($ChildReport["Progression"] != NULL)
+  $report .= "<p> Notable Progressions: " . $ChildReport["Progression"] . "</p>";
+ if ($ChildReport["Comments"] != NULL)
+  $report .= "<p> Comments: " . $ChildReport["Comments"] . "</p></div>";
+ 
+ 
+ echo $report;
+}
+
+?>
 		<form>
-	
-		<a id="Save" style="float: left;" href="ChildDailyAct.php">Edit</a>
-		
-		<p>
-		<a id="Save" style="float: right;"  href="Report.php">Send</a>
-		</p>
+		<a id="back" style="text-align: center;" href="ChildDailyAct.php?id">Back</a>
+				
 		</form>
-		</p>
-        
-	
-	<center><img src="kidsrunning.jpeg" alt="kidrunning" style="width:304px;height:228px;"></center>
-
-	</body>
+</body>
 </html>
