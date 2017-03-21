@@ -178,7 +178,7 @@ while($ActInfo = mysqli_fetch_assoc($result))
 
 			$sql = ("UPDATE wecare.activity SET Nap_Time='$napTime', Food_Eaten='$foodEaten', 
 			Exercise='$exercise', Progression='$progressions', Milestones='$majorMile', Comments='$comments'
-			WHERE activity.Child_ID='$childKey'");
+			WHERE DATE(activity.Timestamp)=CURDATE() AND activity.Child_ID='$childKey'");
 				
 				
 		
