@@ -57,34 +57,34 @@ $pw = "";
 $db = "wecare";
 
 $conn = mysqli_connect($server,$user, $pw, $db);
-$ReportQuery = "SELECT * FROM wecare.child INNER JOIN wecare.activity ON child.child_id = activity.child_id AND child.child_id =" . $_GET['id'];
+$childKey = $_GET['id'];
+$tsKey = $_GET['ts'];
+$ReportQuery = "SELECT * FROM wecare.report where report.timestamp ='$tsKey' AND report.child_ID='$childKey'";
 $result = mysqli_query($conn,$ReportQuery);
 
-while ($ChildReport = mysqli_fetch_assoc($result))
-{
-	
 
- $report = "<div id = 'name'><h2>Child Daily Report<h2> " . $ChildReport["First_Name"] . " " . $ChildReport["Last_Name"]. "</h1><h3> Date: " . date("m/d/Y") . "</h3></div>";
+
+if (!$result) 
+{
+	die("Could not successfully run query ($ReportQuery) from $db: " .	
+		mysqli_error($conn) );
+}
+else
+{	
+$ChildReport = mysqli_fetch_assoc($result);
+
+print $ChildReport['Report_Data'];
+
  
- $report .= "<div id = 'info'><p>Today, " . $ChildReport["First_Name"] . " ate " . $ChildReport["Food_Eaten"] . "</p>";
- 
- $report .= "<p>Took a nap from: " . $ChildReport["Nap_Time"] . "</p>";
- $report .= "<p>Exercise Activities : " . $ChildReport["Exercise"] . "</p>";
- if ($ChildReport["Milestones"] != NULL)
-  $report .= "<p> Milestones: " . $ChildReport["Milestones"] . "</p>";
- if ($ChildReport["Progression"] != NULL)
-  $report .= "<p> Notable Progressions: " . $ChildReport["Progression"] . "</p>";
- if ($ChildReport["Comments"] != NULL)
-  $report .= "<p> Comments: " . $ChildReport["Comments"] . "</p></div>";
- 
- 
- echo $report;
+
 }
 
 ?>
+		<?php echo'
 		<form>
-		<a id="back" style="text-align: center;" href="ChildDailyAct.php?id">Back</a>
+		<a id="back" style="text-align: center" href="PastReports.php?id='.$_GET['id'].'">Back</a>
 				
-		</form>
-</body>
+		</form>';
+		?>
+		</body>
 </html>

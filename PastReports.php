@@ -25,31 +25,33 @@
   </head>
   <body>
     <h1><span>We</span>Care</h1>
-    <form>
-		<div style="width:300px;">
-			
-      
-			<h3><center>Previous Reports</center> </h3>
-			<p>
-			<label for="name" style="float:left;">Child:</label>
-			<label style="float:right;clear:right"><b>Jill Smith</b></label>
-                 
-			</p>
-			&nbsp;
-			<p>
-			<center>1/25/2016</center>
-			<center>12/25/2015</center>
-			<center>11/25/2015</center>
-			<center>10/25/2015</center>
-			<center>9/25/2015</center>
-			
-                  
-			</p>
-			<p>
+    
+	<p>
+	<h3><center>Previous Reports</center> </h3>
+<?php
+
+$server = "localhost";
+$user = "root";
+$password = "";
+$database = "wecare";
+
+$connection = mysqli_connect($server,$user, $password, $database);
+
+$reportQuery = "Select * From wecare.report where Child_ID=".$_GET['id'];
+$result = mysqli_query($connection,$reportQuery);
+while ($reportEntries = mysqli_fetch_assoc($result))
+{
+	echo "<tr><td><center><a href='Report.php?id= ". $reportEntries['Child_ID'] ."&ts=".$reportEntries['timestamp']." '>" . $reportEntries['timestamp'] . "</a></center></td></tr>";
+}
+
+?>
+	
+		<?php echo'
 		<form>
-		<a id="Next" style="float: center;" href="ChildDailyAct.php">Back</a>
-		
-		</form>
+		<a id="Next" style="text-align: center" href="ChildDailyAct.php?id='.$_GET['id'].'">Back</a>
+				
+		</form>';
+		?>
 		</p>
         
       

@@ -126,13 +126,15 @@ if(mysqli_num_rows($result)==0){
 	
 	
 	?>
+	
+
 	<div id="bottomPage" style="margin-left: 200px; background-color: #FFFFCC" valign="bottom" >
 <form method="post">
 	<table width="80%" height="80%" cellspacing="35">
 		
 		<tr>
 			<td><form><a id="pastReports" style="float: left" href="PastReports.php">View Past Reports</a></form></td>
-			<?php echo '<td><form><a id="pastReports" style="float: left" href="Report.php?id= '. $ActInfo['Child_ID'] . '"> Preview Report</a></form></td>'?>
+			<?php echo '<td><form><a id="sendReports" style="float: left" href="saveReport.php?id= '. $ActInfo['Child_ID'] . '"> Save and Send Report</a></form></td>'?>
 			<td> </td>
 		</tr>
 		<tr>
@@ -150,7 +152,7 @@ if(mysqli_num_rows($result)==0){
 		</tr>
 		<tr>
 			<td><center>Photos:</center></td>
-			<td><form action=""> <button type="submit" name="sendReport">Send Report</button></form> </td>		
+			<td> </td>		
 		</tr>
 		<tr>
 			<td><button type="submit" name="save">Save</button> </td>
@@ -203,13 +205,15 @@ while($ActInfo = mysqli_fetch_assoc($result))
 	
 	?>
 	
+
+	
     <div id="bottomPage" style="margin-left: 200px; background-color: #FFFFCC" valign="bottom" >
 <form method="post">
 	<table width="80%" height="80%" cellspacing="35">
 		
 		<tr>
-			<td><form><a id="pastReports" style="float: left" href="PastReports.php">View Past Reports</a></form></td>
-			<?php echo '<td><form><a id="pastReports" style="float: left" href="Report.php?id= '. $ActInfo['Child_ID'] . '"> Preview Report</a></form></td>'?>
+			<?php echo '<td><form><a id="pastReports" style="float: left" href="PastReports.php?id= '.$ActInfo['Child_ID'].'">View Past Reports</a></form></td>' ?>
+			<?php echo '<td><form><a id="sendReports" style="float: left" href="saveReport.php?id= '. $ActInfo['Child_ID'] . '"> Save and Send Report</a></form></td>'?>
 			<td> </td>
 		</tr>
 		<tr>
@@ -227,13 +231,14 @@ while($ActInfo = mysqli_fetch_assoc($result))
 		</tr>
 		<tr>
 			<td><center>Photos:</center></td>
-			<td><form action=""> <button type="submit" name="sendReport">Send Report</button></form> </td>		
+			<td></td>		
 		</tr>
 		<tr>
 			<td><button type="submit" name="update">Update</button> </td>
 			<td> <button type="submit" name="delete" onclick="return deleteCheck()">Delete</button></td>		
 		</tr><?php
 }?>
+
 					
 	</table>
 			
