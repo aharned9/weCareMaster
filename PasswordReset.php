@@ -33,6 +33,7 @@
 		<li><a href="ChildDailyAct.php">Home</a></li>
 		<li><a href="AddNewChild.php">Add Child</a></li>
 		<li><a href="AddNewWorker.php">Add Employee</a></li>
+		<li><a href="EditDaycare.php">Add/Edit Daycare</a></li>
 		<li><a href="PasswordReset.php">Password Reset</a></li>
 	</ul>
     <form>
