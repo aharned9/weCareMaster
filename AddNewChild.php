@@ -77,6 +77,7 @@
 		<li><a href="Workerlandingpage.php">Home</a></li>
 		<li class="active"><a href="AddNewChild.php">Add Child</a></li>
 		<li><a href="AddNewWorker.php">Add Employee</a></li>
+		<li><a href="EditDaycare.php">Add/Edit Daycare</a></li>
 		<li><a href="PasswordReset.php">Password Reset</a></li>
 	</ul>
 	<div class="table-responsive" id="names" style="width: 200px;background-color: #1a1a1a; float: left;">
